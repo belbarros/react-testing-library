@@ -43,3 +43,12 @@ test('The Fav Link', () => {
   const { pathname } = history.location;
   expect(pathname).toBe('/favorites');
 });
+
+test('The link not found page', () => {
+  const { history } = renderWithRouter(<App />);
+
+  history.push('/not-a-link');
+
+  const notFoundPage = screen.getByText(/Page requested not found/i);
+  expect(notFoundPage).toBeInTheDocument();
+});
